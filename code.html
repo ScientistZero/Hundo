@@ -46,7 +46,7 @@
                         <a class="nav-link active" aria-current="page" href="code.html">The Code</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="#">Git Repo</a>
+                        <a class="nav-link" target="_blank" href="https://github.com/ScientistZero/Hundo">Git Repo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" target="_blank" href="https://www.chrisherzig.com">About</a>
@@ -120,6 +120,7 @@ let templateRows = "";
         else{
 className = "odd";
         }
+        //This does render correctly with Prism. See the source.
         templateRows += `<tr><td class="${className}">${number}</td></tr>`;
     }
 document.getElementById('results').innerHTML = templateRows
@@ -129,10 +130,24 @@ document.getElementById('results').innerHTML = templateRows
 </pre>
     </div>
     <div class="col-lg-4">
-<p>The Code is structured in one function.</p>
-<h5>Hello World</h5>
-<p>Hello World is a function that displays an alert with a message of "Hello World".</p>
-    </div>
+<p>The Code is structured in three functions to seperate the controller, the logic and the display.</p>
+<h4>Functions</h4>
+<br>
+<h5>getValues()</h5>
+<p>With the getValues function, I capture both the startValue and the endValue inputs from the form.Then the inputs are parsed into integers using the built in parseInt function. I then checked for the success of this parsing with an if/else statement.</p>
+<p>I then create a new variable named numbers, and set it equal to whatever our function generateNumbers returns when we pass in the startValue and endValue parameters.</p>
+<p>The function then takes the numbers variable (it will be an array), and calls the final function displayNumbers while passing this numbers array in as parameter.</p>
+<br>
+<h5>generateNumbers()</h5>
+<p>This function starts by creating an empty array variable called numbers. Using two parameters, startValue and endValue, from the getValues function we create a for loop. This for loop starts with the startValue value, and loops over every number up to and including the endValue. During each loop we are simply adding that number to our numbers array using the push function. After each number in our range has been added to the numbers array, we return the numbers array back to the getValues function.</p>
+<br>
+<h5>displayNumbers()</h5>
+<p>This function is where the real magic happens. The previously acquired numbers array is passed in as a parameter, and provides us with an array of numbers we want to display in our html table dynamically. The ultimate goal of this function is to have a string of html table rows to insert into our results table on-screen.</p>
+
+    <p>We start by creating a variable called templateRows, which is an empty string to start. We then start another for loop. This loop is designed to run as many times as there are elements in the numbers array, which is achieved using the array.length function when setting up the for loop. We create a variable of className to allow us to apply styling to the html elements we are about to create. Inside each loop we want to look at each individual number, and we do this with the number variable being equivalent to the value at the array's current index location.</p>
+    <p>We then test that number to see if it is even or odd using the modulo (%) operator. If the number is evenly divisible by two, then number % 2 == 0, and we add the "even" class to our html elements. If the number is not divisible by two, then we add the "odd" class to our html element. At the end of the loop we simply append a string containing our table row tags, the proper class designation, and the value of the number variable.</p>
+    <p>The last line in our code grabs the element in our html with the id "results," in our case our table, and sets its the html inside that element to the string created by our for loop. This html creates the table you see on screen.</p>
+</div>
 </div>
         </div>
     </main>
